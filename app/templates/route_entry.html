@@ -1,0 +1,107 @@
+<!-- templates/route_entry.html -->
+
+{% extends 'base.html' %}
+{% block title %}Route Entry - Logbook App{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>New Route Entry</h2>
+    <form method="POST" action="{{ url_for('route_entry') }}">
+        {{ form.hidden_tag() }}
+        <!-- Route Details -->
+        <h4>Route Details</h4>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                {{ form.date.label }}
+                {{ form.date(class="form-control") }}
+            </div>
+            <div class="form-group col-md-4">
+                {{ form.start_time.label }}
+                {{ form.start_time(class="form-control") }}
+            </div>
+            <div class="form-group col-md-4">
+                {{ form.finish_time.label }}
+                {{ form.finish_time(class="form-control") }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                {{ form.route_from.label }}
+                {{ form.route_from(class="form-control", id="routeFrom") }}
+            </div>
+            <div class="form-group col-md-6">
+                {{ form.route_to.label }}
+                {{ form.route_to(class="form-control", id="routeTo") }}
+            </div>
+        </div>
+        <!-- Vehicle Details -->
+        <h4>Vehicle Details</h4>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                {{ form.start_mileage.label }}
+                {{ form.start_mileage(class="form-control") }}
+            </div>
+            <div class="form-group col-md-4">
+                {{ form.end_mileage.label }}
+                {{ form.end_mileage(class="form-control") }}
+            </div>
+            <div class="form-group col-md-4">
+                {{ form.load_status.label }}
+                {{ form.load_status(class="form-control") }}
+            </div>
+        </div>
+        <!-- Container Details -->
+        <h4>Container Details</h4>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                {{ form.container_number.label }}
+                {{ form.container_number(class="form-control") }}
+            </div>
+            <div class="form-group col-md-6">
+                {{ form.chassis_number.label }}
+                {{ form.chassis_number(class="form-control") }}
+            </div>
+        </div>
+        <!-- Standby Times -->
+        <h4>Standby Times</h4>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                {{ form.standby_time_in.label }}
+                {{ form.standby_time_in(class="form-control") }}
+            </div>
+            <div class="form-group col-md-6">
+                {{ form.standby_time_out.label }}
+                {{ form.standby_time_out(class="form-control") }}
+            </div>
+        </div>
+        <!-- Inspection Checklist -->
+        <h4>Inspection Checklist</h4>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                {{ form.lights() }} {{ form.lights.label }}
+            </div>
+            <div class="form-group col-md-4">
+                {{ form.tires() }} {{ form.tires.label }}
+            </div>
+            <div class="form-group col-md-4">
+                {{ form.brakes() }} {{ form.brakes.label }}
+            </div>
+            <!-- Add additional inspection fields as necessary -->
+        </div>
+        <div class="form-group">
+            {{ form.remarks.label }}
+            {{ form.remarks(class="form-control") }}
+        </div>
+        <!-- Digital Signature -->
+        <h4>Signature</h4>
+        <canvas id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+        <input type="hidden" name="signature" id="signature">
+        <button id="clear" class="btn btn-secondary btn-sm">Clear Signature</button>
+        <br><br>
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/signature_pad.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
